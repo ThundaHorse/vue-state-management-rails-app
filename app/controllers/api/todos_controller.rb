@@ -4,6 +4,24 @@ class Api::TodosController < ApplicationController
     render 'index.json.jbuilder'
   end 
 
+  def update 
+    @todo = Todo.find(params[:id]) 
+
+    @todo.title = params[:title] || @todo.title
+    @todo.completed = params[:completed] || @todo.completed
+
+    if @todo.save 
+      render 'show.json.jbuilder'
+    else 
+      render json: { messages: @todo.errors.full_messages }, status: :unprocessable_entity
+    end 
+  end 
+
+  def completed 
+    @todos = Todo.where(completed: true)
+    render 'completed.json.jbuilder'
+  end 
+
   def show 
     @todo = Todo.find(params[:id])
     render 'show.json.jbuilder'
@@ -19,23 +37,6 @@ class Api::TodosController < ApplicationController
       render 'show.json.jbuilder'
     else 
       render json: { message: @todo.errors.full_messages }
-    end 
-  end 
-
-  def update 
-    @todo = Todo.find(params[:id]) 
-
-    if @todo 
-      @todo.title = params[:title] || @todo.title
-      @todo.completed = params[:completed] || @todo.completed
-
-      if @todo.save 
-        render 'show.json.jbuilder'
-      else 
-        render json: { messages: @todo.errors.full_messages }, status: :unprocessable_entity
-      end 
-    else 
-      render json: { errors: "To-do does not exist" }
     end 
   end 
 

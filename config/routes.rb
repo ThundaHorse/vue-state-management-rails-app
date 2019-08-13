@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do 
     get '/todos' => 'todos#index'
+    get '/todos/completed' => 'todos#completed'
     get '/todos/:id' => 'todos#show'
     get '/todos/limit/:limit' => 'todos#limit'
     post '/todos' => 'todos#create'

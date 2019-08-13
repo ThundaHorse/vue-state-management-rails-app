@@ -1,1 +1,1 @@
-json.array! @todos, partial: 'todo', as: :todo
+json.array! @todos.order(:completed), partial: 'todo', as: :todo
