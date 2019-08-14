@@ -11,6 +11,7 @@ class Api::TodosController < ApplicationController
     @todo.completed = params[:completed] || @todo.completed
 
     if @todo.save 
+      @todo.save
       render 'show.json.jbuilder'
     else 
       render json: { messages: @todo.errors.full_messages }, status: :unprocessable_entity
