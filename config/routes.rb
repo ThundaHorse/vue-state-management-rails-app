@@ -7,5 +7,7 @@ Rails.application.routes.draw do
     post '/todos' => 'todos#create'
     patch '/todos/:id' => 'todos#update'
     delete '/todos/:id' => 'todos#destroy'
+
+    get "/*path" => proc { [200, {}, [ActionView::Base.new.render(file: 'public/index.html')]] }
   end 
 end
