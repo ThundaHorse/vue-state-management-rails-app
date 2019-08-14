@@ -43,12 +43,8 @@ class Api::TodosController < ApplicationController
 
   def destroy 
     @todo = Todo.find(params[:id])
-    if @todo 
-      @todo.destroy 
-      render json: {errors: "Successfully removed!" }
-    else 
-      render json: { message: "Unable to find To-do" }
-    end 
+    @todo.destroy 
+    render json: {errors: "Successfully removed!" }
   end 
 
   def limit 
