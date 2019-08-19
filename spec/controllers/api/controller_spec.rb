@@ -46,6 +46,7 @@ RSpec.describe Api::TodosController, type: :controller do
     it { should route(:get, 'api/todos/limit/3').to(action: :limit, limit: 3)}
 
     it { should route(:post, 'api/todos').to(action: :create)}
+  
   end
 
   describe "index action" do 
@@ -61,6 +62,64 @@ RSpec.describe Api::TodosController, type: :controller do
       expect(response).to render_template("completed.json.jbuilder")
     end 
   end 
+
+  describe 'show action' do 
+    todo = Todo.create(title: 'test', completed: true) 
+    before { get :show, {:params => { :id => todo.id }} }
+    it { should render_template('show.json.jbuilder') }
+  end
+
+  describe 'successful create action' do 
+    params = {
+      title: 'test',
+      completed: false 
+    }
+
+    before { post :create, { :params => params }}
+    it { should render_template('show.json.jbuilder') }
+  end 
+
+  describe 'failed create action' do 
+    params = {
+      completed: false 
+    }
+
+    before { post :create, { :params => params }}
+    it { should_not render_template('show.json.jbuilder') }
+  end 
+
+  describe 'update action' do 
+    todo = Todo.create(title: 'test', completed: true) 
+
+    params = {
+      id: todo.id,
+      title: 'test 2',
+      completed: false 
+    }
+
+    before { patch :update, { :params => params }}
+    it { should render_template('show.json.jbuilder') }
+  end 
+
+  describe 'destroy action' do 
+    todo = Todo.create(title: 'test', completed: true) 
+
+  end 
+
+  describe 'limit action' do 
+    todo = Todo.create(title: 'test 1', completed: true) 
+    todo = Todo.create(title: 'test 2', completed: true) 
+    todo = Todo.create(title: 'test 3', completed: true) 
+
+    before { get :limit, { :params =>  limit = { limit: 1 }}}
+    it { should render_template("limit.json.jbuilder")}
+  end 
+
+  describe 'destroy action' do 
+    todo = Todo.create(title: 'test 1', completed: true) 
+
+    before { delete :destroy, { :params => id = { id: todo.id }}}
+    it { should respond_with(200)}
+  end 
+
 end 
-
-
