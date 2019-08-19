@@ -30,23 +30,15 @@ RSpec.describe ApplicationControllerSubclass do
     end
   end
 end
-
 RSpec.describe Api::TodosController, type: :controller do 
   describe Api::TodosController do
     it { should route(:get, 'api/todos').to(action: :index) }
-
     it { should route(:get, 'api/todos/completed').to(action: :completed) }
-
     it { should route(:get, 'api/todos/1').to(action: :show, id: 1) }
-
     it { should route(:patch, 'api/todos/2').to(action: :update, id: 2) }
-
     it { should route(:delete, 'api/todos/4').to(action: :destroy, id: 4) }
-
     it { should route(:get, 'api/todos/limit/3').to(action: :limit, limit: 3)}
-
     it { should route(:post, 'api/todos').to(action: :create)}
-  
   end
 
   describe "index action" do 
@@ -121,5 +113,4 @@ RSpec.describe Api::TodosController, type: :controller do
     before { delete :destroy, { :params => id = { id: todo.id }}}
     it { should respond_with(200)}
   end 
-
 end 
