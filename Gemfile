@@ -26,6 +26,11 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
+gem "rspec-rails", "~> 3.8"
+gem "shoulda-matchers", "~> 4.0.1"
+gem 'simplecov', require: false, group: :test
+gem 'rails-controller-testing'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -41,6 +46,15 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+end
+
+group :test do
+  # Adds support for Capybara system testing and selenium driver
+  gem "capybara", ">= 2.15"
+  gem "selenium-webdriver"
+  # Easy installation and use of chromedriver to run system tests with Chrome
+  gem "chromedriver-helper"
+  gem 'simplecov', require: false
 end
 
 
