@@ -25,10 +25,10 @@ gem 'jbuilder', '~> 2.5'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
+gem "nokogiri", ">= 1.10.4"
 
 gem "rspec-rails", "~> 3.8"
 gem "shoulda-matchers", "~> 4.0.1"
-gem 'simplecov', require: false, group: :test
 gem 'rails-controller-testing'
 
 # Use Capistrano for deployment
